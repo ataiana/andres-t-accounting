@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build-angular && npm run start-server",
-    "start-server": "node index.js",
+    "start-server": "npm install && node index.js",
     "build-angular": "(cd angular && npm install && npm run build)"
   },
   "repository": {
