@@ -1,0 +1,65 @@
+<div class="container">
+
+    <div class="row">
+        <div class=col-12>
+            <h1 class="text-center font-weight-light mt-5">Accounting</h1>
+            <h4 class="text-center font-weight-light mt-1">Transactions History</h4>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center mt-5" *ngIf="transactions.length === 0">
+        <div class="w-50">
+            <div class="alert alert-primary" role="alert">
+                There are no transactions yet!
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center mt-5" *ngIf="transactions.length > 0">
+        <div class="w-50">
+            <h5 class="alert alert-primary text-uppercase" role="alert">
+                Balance: {{balance}} u$d
+            </h5>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center mt-5" *ngIf="transactions.length > 0">
+        <div class="w-50">
+            <ngb-accordion [closeOthers]="true" activeIds="">
+                <div *ngFor="let item of transactions">
+                    <ngb-panel>
+                        <ng-template ngbPanelHeader>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <button ngbPanelToggle
+                                    class="btn btn-link font-weight-bold text-uppercase text-left pl-0" [ngClass]="{
+                                    'text-success': item.type === 'credit',
+                                    'text-warning': item.type === 'debit'
+                                }">
+                                    {{item.type}} : {{item.amount}} u$d
+                                </button>
+                            </div>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Datetime</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{item.id}}</td>
+                                        <td>{{item.type}}</td>
+                                        <td>{{item.amount}}</td>
+                                        <td>{{item.effectiveDate}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ng-template>
+                    </ngb-panel>
+                </div>
+            </ngb-accordion>
+        </div>
+    </div>
+</div>

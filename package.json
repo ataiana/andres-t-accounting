@@ -1,0 +1,22 @@
+{
+  "name": "andres-t-accounting",
+  "version": "1.0.0",
+  "description": "AgileEngine Test",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build-angular && npm run start-server",
+    "start-server": "node index.js",
+    "build-angular": "(cd angular && npm install && npm run build)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:ataiana/andres-t-accounting.git"
+  },
+  "author": "Andres Taiana",
+  "license": "ISC",
+  "homepage": "https://github.com/ataiana/andres-t-accounting#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
