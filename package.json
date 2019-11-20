@@ -16,6 +16,7 @@
   "license": "ISC",
   "homepage": "https://github.com/ataiana/andres-t-accounting#readme",
   "dependencies": {
+    "@angular/cli": "^8.3.19",
     "body-parser": "^1.19.0",
     "express": "^4.17.1"
   }
