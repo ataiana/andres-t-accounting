@@ -4,8 +4,8 @@
   "description": "AgileEngine Test",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build-angular && npm run start-server",
-    "start-server": "npm install && node index.js",
+    "start": "(npm run build-angular && npm run start-server)",
+    "start-server": "(npm install && node index.js)",
     "build-angular": "(cd angular && npm install && npm run build)"
   },
   "repository": {
