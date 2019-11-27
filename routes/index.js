@@ -24,7 +24,7 @@ app.get('/transaction', (req, res) => {
 // GET - Fetches transaction
 app.get('/transaction/:id', (req, res) => {
     const id = req.params.id;
-    const result = transactions.filter( (transaction) => transaction.id == id);
+    const result = transactions.filter((transaction) => transaction.id == id);
     res.json({
         success: true,
         result: result
@@ -33,23 +33,39 @@ app.get('/transaction/:id', (req, res) => {
 
 // POST - Commit new transaction to the account
 app.post('/transaction', (req, res) => {
-    const body = req.body;
+    const type = req.body.type;
+    const amount = parseInt(req.body.amount);
 
-    if (!body.type || !body.amount) {
+    if (isNaN(req.body.amount)) {
+        return res.status(400).json({
+            success: false,
+            result: `Transaction's amount must be a number`
+        });
+    }
+
+    if (!['debit', 'credit'].includes(type)) {
+        return res.status(400).json({
+            success: false,
+            result: `Transaction's type must be either 'credit' or 'debit'`
+        });
+    }
+
+    if (!type || !amount) {
         return res.status(400).json({
             success: false,
             result: 'Missing input value/s'
         });
     }
 
-    if (parseInt(body.amount) <= 0) {
+    if (amount <= 0) {
         return res.json({
             success: false,
             result: `Transaction value cannot be less or equal to 0`
         });
     }
 
-    const total = body.type === 'credit' ? accountBalance + parseInt(body.amount) : accountBalance - parseInt(body.amount);
+    const total =
+        type === 'credit' ? accountBalance + amount : accountBalance - amount;
 
     if (total < 0) {
         return res.json({
@@ -64,8 +80,8 @@ app.post('/transaction', (req, res) => {
 
     const result = {
         id: transactions.length + 1,
-        type: body.type,
-        amount: body.amount,
+        type: type,
+        amount: amount,
         effectiveDate: now.toISOString()
     };
 
