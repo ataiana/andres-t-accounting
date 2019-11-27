@@ -25,6 +25,21 @@ app.get('/transaction', (req, res) => {
 app.get('/transaction/:id', (req, res) => {
     const id = req.params.id;
     const result = transactions.filter((transaction) => transaction.id == id);
+
+    if (isNaN(id)) {
+        return res.status(400).json({
+            success: false,
+            result: `Transaction's id must be a number`
+        });
+    }
+
+    if (result.length === 0) {
+        return res.status(400).json({
+            success: false,
+            result: `The transaction does not exists`
+        });
+    }
+
     res.json({
         success: true,
         result: result
