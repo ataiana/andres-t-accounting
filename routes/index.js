@@ -2,10 +2,10 @@ const express = require('express');
 
 const app = express();
 
-let transactions = [];
+const transactions = [];
 let accountBalance = 0;
 
-// GET - Fetches transactions history
+// GET - Fetch Balance
 app.get('/transaction/balance', (req, res) => {
     res.json({
         success: true,
@@ -13,7 +13,7 @@ app.get('/transaction/balance', (req, res) => {
     });
 });
 
-// GET - Fetches transactions history
+// GET - Fetch transaction history
 app.get('/transaction', (req, res) => {
     res.json({
         success: true,
@@ -24,7 +24,6 @@ app.get('/transaction', (req, res) => {
 // GET - Fetches transaction
 app.get('/transaction/:id', (req, res) => {
     const id = req.params.id;
-    const result = transactions.filter((transaction) => transaction.id == id);
 
     if (isNaN(id)) {
         return res.status(400).json({
@@ -32,6 +31,8 @@ app.get('/transaction/:id', (req, res) => {
             result: `Transaction's id must be a number`
         });
     }
+
+    const result = transactions.filter((transaction) => transaction.id == id);
 
     if (result.length === 0) {
         return res.status(400).json({
@@ -42,14 +43,14 @@ app.get('/transaction/:id', (req, res) => {
 
     res.json({
         success: true,
-        result: result
+        result: result[0]
     });
 });
 
 // POST - Commit new transaction to the account
 app.post('/transaction', (req, res) => {
     const type = req.body.type;
-    const amount = parseInt(req.body.amount);
+    const transactionTypes = ['debit', 'credit'];
 
     if (isNaN(req.body.amount)) {
         return res.status(400).json({
@@ -58,12 +59,14 @@ app.post('/transaction', (req, res) => {
         });
     }
 
-    if (!['debit', 'credit'].includes(type)) {
+    if (!transactionTypes.includes(type)) {
         return res.status(400).json({
             success: false,
             result: `Transaction's type must be either 'credit' or 'debit'`
         });
     }
+
+    const amount = parseInt(req.body.amount);
 
     if (!type || !amount) {
         return res.status(400).json({

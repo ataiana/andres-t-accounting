@@ -4,6 +4,9 @@
 
 **Angular 8 and bootstrap for UI**
 
+## Run Api Tests
+Run `npm test` to test the Api using Mocha/Chai
+
 ## Run Project
 Run `npm start` on project's root folder. It builds the angular app inside the "/angular" folder and sends the bundle files to "/public" folder which is the default static route of the node server. Both app and api runs on **port 3000**
 

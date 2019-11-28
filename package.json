@@ -6,7 +6,8 @@
   "scripts": {
     "start": "(npm run build-angular && npm run start-server)",
     "start-server": "(npm install && node index.js)",
-    "build-angular": "(cd angular && npm install && npm run build)"
+    "build-angular": "(cd angular && npm install && npm run build)",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,10 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.2.2"
   }
 }
