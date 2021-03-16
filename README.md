@@ -2,7 +2,7 @@
 
 **NodeJs/Express restApi for backend**
 
-**Angular 8 and bootstrap for UI**
+**Angular 11 and bootstrap for UI**
 
 ## Run Api Tests
 Run `npm test` to test the Api using Mocha/Chai
